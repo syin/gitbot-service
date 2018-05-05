@@ -13,6 +13,7 @@ router = routing.Router()
 @router.register("pull_request", action="closed")
 async def say_thanks_merge(event, gh, *args, **kwargs):
     """ Whenever an issue is opened, greet the author and say thanks."""
+    url = event.data["pull_request"]["issue_url"]
     merged = event.data["pull_request"]["merged"]
 
     if merged:
