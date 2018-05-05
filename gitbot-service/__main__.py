@@ -8,6 +8,9 @@ from gidgethub import routing, sansio
 from gidgethub import aiohttp as gh_aiohttp
 
 
+router = routing.Router()
+
+
 @router.register("issues", action="opened")
 async def issue_opened_event(event, gh, *args, **kwargs):
     """ Whenever an issue is opened, greet the author and say thanks."""
