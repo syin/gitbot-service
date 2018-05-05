@@ -12,12 +12,12 @@ router = routing.Router()
 @router.register("issue_comment", action="created")
 async def react_issues(event, gh, *args, **kwargs):
     """ Whenever an issue is opened, greet the author and say thanks."""
-    url = event.data["comment"]["url"]
+    url = event.data["comment"]["url"] + "/reactions"
 
     await gh.post(
         url,
         accept="application/vnd.github.squirrel-girl-preview+json",
-        data={"body": "heart"})
+        data={"content": "heart"})
 
 
 @router.register("pull_request", action="closed")
