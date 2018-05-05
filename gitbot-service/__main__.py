@@ -16,6 +16,8 @@ async def say_thanks_merge(event, gh, *args, **kwargs):
     print(event.data)
     url = event.data["pull_request"]["issue_url"]
     merged = event.data["pull_request"]["merged"]
+    print("merged", merged)
+    print("url", url)
 
     if merged:
         message = f"Thanks for the PR."
