@@ -14,7 +14,7 @@ router = routing.Router()
 async def say_thanks_merge(event, gh, *args, **kwargs):
     """ Whenever an issue is opened, greet the author and say thanks."""
     print(event.data)
-    url = event.data["pull_request"]["issue_url"]
+    url = event.data["pull_request"]["issue_url"] + "/comments"
     merged = event.data["pull_request"]["merged"]
     print("merged", merged)
     print("url", url)
