@@ -9,15 +9,22 @@ from gidgethub import aiohttp as gh_aiohttp
 
 router = routing.Router()
 
+@router.register("issue_comment", action="created")
+async def react_issues(event, gh, *args, **kwargs):
+    """ Whenever an issue is opened, greet the author and say thanks."""
+    url = event.data["comment"]["url"]
+
+    await gh.post(
+        url,
+        accept="application/vnd.github.squirrel-girl-preview+json",
+        data={"body": "heart"})
+
 
 @router.register("pull_request", action="closed")
 async def say_thanks_merge(event, gh, *args, **kwargs):
     """ Whenever an issue is opened, greet the author and say thanks."""
-    print(event.data)
     url = event.data["pull_request"]["issue_url"] + "/comments"
     merged = event.data["pull_request"]["merged"]
-    print("merged", merged)
-    print("url", url)
 
     if merged:
         message = f"Thanks for the PR."
